@@ -2,8 +2,11 @@ import {
     LOGIN,
     LOGIN_PROGRESS,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOGOUT
 } from '../types';
+import React from 'react';
+import {Redirect} from 'react-router';
 
 const login = ({username, password}, type) => {
     const trueType = 'login';
@@ -16,6 +19,7 @@ const login = ({username, password}, type) => {
             if((username == 'cystg') && (password == 'cystg')){
                 dispatch({type : LOGIN_SUCCESS, payload : 'Welcome to the page'});
                 dispatch({type : LOGIN, payload : true});
+                return(<Redirect to="/signup" />)
             }
             else{
                 dispatch({type : LOGIN_ERROR, payload : 'Wrong credentials data'});

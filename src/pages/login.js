@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import actions from '../actions';
+import {connect} from 'react-redux';
 import '../design/form.css';
 
 class Login extends Component{
@@ -18,16 +20,19 @@ class Login extends Component{
 
     handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(this.state);
+        const {username, password} = this.state;
+        this.props.login({username, password}, 'login');
     }
 
     render(){
+        console.log(this.props);
         return(
             <div>
                 <div className="container">
                     <div className="title">
                         Log In
                     </div>
+                    {/* {isLogged ? <div>You logged in</div> : null} */}
                     <div className="input-field">
                         <label htmlFor="username">Username</label><br></br>
                         <input 
@@ -61,4 +66,13 @@ class Login extends Component{
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return({
+        inProgress : state.authentication.inProgress,
+        errorMsg : state.authentication.errorMsg,
+        successMsg : state.authentication.successMsg,
+        loggedIn : state.authentication.loggedIn
+    });
+}
+  
+export default connect(mapStateToProps, actions)(Login);

@@ -8,8 +8,8 @@ import {
 
 const initialState = {
     inProgress : false,
-    errorMsg : '',
-    successMsg : '',
+    errorMsg : null,
+    successMsg : null,
     loggedIn : false
 };
 
